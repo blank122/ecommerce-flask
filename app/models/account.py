@@ -10,7 +10,8 @@ class Account(db.Model):
     password = db.Column(db.String(500), nullable=False)
     created_at = db.Column(db.DateTime)
     user_id = db.Column(db.Integer)
-    
+    account_type = db.Column(db.Integer)
+
     def set_password(self, password):
         self.password = generate_password_hash(password)
 

@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from .extensions import db, jwt
+from .extensions import db, jwt, mail
 from .config import Config
 from .routes.auth_routes import auth_bp
 from sqlalchemy.exc import OperationalError
@@ -11,6 +11,7 @@ def create_app():
 
     db.init_app(app)
     jwt.init_app(app)
+    mail.init_app(app) 
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
 

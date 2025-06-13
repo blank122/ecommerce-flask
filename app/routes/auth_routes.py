@@ -1,9 +1,10 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, current_app, request, jsonify
 from ..models.account import Account
 from ..extensions import db
 from flask_jwt_extended import create_access_token
 from datetime import datetime
 from ..models.user import User
+from utils.mail_service import send_email
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -34,6 +35,17 @@ def register():
 
     db.session.add(account)
     db.session.commit()
+    
+    try:
+        
+        send_email(
+            subject="Welcome to Our App!",
+            recipients=[data['email']],
+            body=f"Hi {data['first_name']},\n\nThank you for registering with us!"
+        )
+    
+    except Exception as e:
+        current_app.logger.error(f"Failed to send email: {e}")
 
     return jsonify({"message": "User registered successfully", "user_id": user.id}), 201
 
