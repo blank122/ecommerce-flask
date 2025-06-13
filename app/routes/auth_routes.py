@@ -39,14 +39,13 @@ def register():
     db.session.add(account)
     db.session.commit()
     
+    #add a try catch incase the send email will fail 
     try:
-        
         send_email(
             subject="Welcome to Our App!",
             recipients=[data['email']],
             body=f"Hi {data['first_name']},\n\nThank you for registering with us!"
         )
-    
     except Exception as e:
         current_app.logger.error(f"Failed to send email: {e}")
 
