@@ -175,14 +175,14 @@ def assign_and_send_deals():
         for email in accounts:
             deal = random.choice(DEALS)
             try:
-                send_deal_email(deal, "🔥 Your Brand Deal", [email])
+                send_deal_email(deal, "🔥 Your Brand Deal", email)
                 print(f"✅ Deal sent to {email}")
             except Exception as e:
                 print(f"❌ Failed to send email to {email}: {e}")
     except Exception as e:
         print(f"❌ Error in assign_and_send_deals: {e}")
 
-def start_scheduler(app, interval_minutes=5):
+def start_scheduler(app, interval_minutes):
     scheduler = BackgroundScheduler()
 
     @scheduler.scheduled_job('interval', minutes=interval_minutes)

@@ -18,7 +18,7 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     
     with app.app_context():
-        start_scheduler(app, interval_minutes=5)
+        start_scheduler(app, interval_minutes=1440)
         print("🛑 Scheduler stopped manually.")
             
     @app.route('/api/test-db')
