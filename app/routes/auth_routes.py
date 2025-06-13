@@ -49,4 +49,4 @@ def login():
 
 @auth_bp.route('/hello', methods=['GET'])
 def hello_api():
-    return jsonify({"message": "Hello from Flask API Note-app-flask!"}), 200
+    return jsonify({"message": "Hello from Flask API Ecommerce App!"}), 200

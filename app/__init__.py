@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 from .extensions import db, jwt
 from .config import Config
 from .routes.auth_routes import auth_bp
-from .routes.note_routes import note_bp
 from sqlalchemy.exc import OperationalError
 from sqlalchemy import text  # <-- add this import
 
@@ -14,7 +13,6 @@ def create_app():
     jwt.init_app(app)
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
-    app.register_blueprint(note_bp, url_prefix='/api/notes')
 
     @app.route('/api/test-db')
     def test_db_connection():
