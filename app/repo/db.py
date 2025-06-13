@@ -1,9 +1,9 @@
-from ..extensions import db
-from ..models import Account
+from ..models.account import Account
 
 def get_all_accounts():
     try:
-        accounts = db.query(Account.email).all()
+        accounts = Account.query.with_entities(Account.email).all()
         return [email for (email,) in accounts]
-    finally:
-        db.close()
+    except Exception as e:
+        print(f"❌ DB Error in get_all_accounts: {e}")
+        return []
