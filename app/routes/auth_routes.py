@@ -4,7 +4,7 @@ from ..extensions import db
 from flask_jwt_extended import create_access_token
 from datetime import datetime
 from ..models.user import User
-from utils.mail_service import send_email
+from ..utils.mail_service import send_email
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -20,7 +20,9 @@ def register():
     user = User(
         first_name=data['first_name'],
         last_name=data['last_name'],
-        birthdate=data['birthdate'],
+        birth_date=data['birth_date'],
+        gender=data['gender']
+        
     )
     db.session.add(user)
     db.session.flush()  # Assigns an ID to `user` without committing
@@ -29,7 +31,8 @@ def register():
     account = Account(
         email=data['email'],
         created_at=datetime.utcnow(),
-        user_id=user.id  # Grab the auto-generated ID
+        user_id=user.id, 
+        account_type=data['account_type']
     )
     account.set_password(data['password'])
 

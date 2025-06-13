@@ -8,6 +8,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(255), unique=True, nullable=False)
     last_name = db.Column(db.String(500), nullable=False)
-    birthdate = db.Column(db.DateTime)
+    birth_date = db.Column(db.DateTime)
+    gender = db.Column(db.Integer)
 
     # notes = db.relationship('Note', backref='owner', lazy=True)
