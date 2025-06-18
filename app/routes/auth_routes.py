@@ -2,7 +2,7 @@ from flask import Blueprint, current_app, request, jsonify
 from ..models.account import Account
 from ..extensions import db
 from flask_jwt_extended import create_access_token
-from datetime import datetime
+import datetime
 from ..models.user import User
 from ..utils.mail_service import send_email
 
@@ -30,7 +30,7 @@ def register():
     # Create new account and link to the user
     account = Account(
         email=data['email'],
-        created_at=datetime.utcnow(),
+        created_at=datetime.datetime.now(datetime.timezone.utc),
         user_id=user.id, 
         account_type=data['account_type']
     )
